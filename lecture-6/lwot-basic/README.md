@@ -1,7 +1,7 @@
 ## Installation & Run 
 
 ```
-> git pull https://github.com/proin/web-tutorial
+> git clone https://github.com/proin/web-tutorial
 > cd web-tutorial/lecture-6/lwot-basic
 > lwot install
 > bower install
