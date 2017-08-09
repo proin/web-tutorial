@@ -1,0 +1,20 @@
+{
+  "name": "express-basic",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "proin <proin@proinlab.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/proin/web-tutorial",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

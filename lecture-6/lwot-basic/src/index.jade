@@ -1,0 +1,26 @@
+doctype html
+html(ng-app="app")
+    head
+        include components/jade/header
+        script(src="{$ROOT}/view/js/index.js")
+        link(rel="stylesheet", href="{$ROOT}/view/css/index.css")
+
+    body(ng-controller='ctrl')
+        nav.navbar.navbar-toggleable-md.bg-faded.fixed-top.navbar-inverse.bg-primary
+            button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            a.navbar-brand(href='#') Navbar
+            #navbarSupportedContent.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item.active
+                        a.nav-link(href='#') Home
+                    li.nav-item
+                        a.nav-link(href='#') Link
+        .container
+            h1 Interests
+            hr
+            h3(ng-repeat='item in list', ng-cloak) - {{item.title}}&nbsp;
+                span.badge.badge-danger(ng-if='item.favorite <= 2') {{item.favorite}}
+                span.badge.badge-warning(ng-if='item.favorite == 3') {{item.favorite}}
+                span.badge.badge-primary(ng-if='item.favorite == 4') {{item.favorite}}
+                span.badge.badge-success(ng-if='item.favorite >= 5') {{item.favorite}}

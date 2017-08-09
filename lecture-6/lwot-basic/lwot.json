@@ -1,0 +1,12 @@
+{
+    "name": "lwot-basic",
+    "version": "0.0.0",
+    "private": true,
+    "authors": "authors",
+    "description": "my Project",
+    "dependencies": {
+        "platform": {
+            "express": "https://github.com/searble/lwot-platform-express"
+        }
+    }
+}
