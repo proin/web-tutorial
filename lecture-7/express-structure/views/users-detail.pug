@@ -1,0 +1,25 @@
+html
+    head
+        title Users
+        link(rel='stylesheet', href='/static/css/users-detail.css')
+        link(rel='stylesheet', href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css')
+    body
+        .content
+            a(href='/users') back
+            .card
+                .firstinfo
+                    img(src="/static/img/profile.jpg")
+                    .profileinfo
+                        h1= username
+                        h3 Python Ninja
+                        p.bio
+                            | Lived all my life on the top of mount Fuji, learning the way to be a Ninja Dev.
+            .badgescard
+                span.devicons.devicons-django
+                span.devicons.devicons-python 
+                span.devicons.devicons-codepen
+                span.devicons.devicons-javascript_badge
+                span.devicons.devicons-gulp
+                span.devicons.devicons-angular
+                span.devicons.devicons-sass
+        

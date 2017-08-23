@@ -1,0 +1,15 @@
+html(ng-app='app')
+    head
+        title Users
+        include ./headers/head
+        script(type='text/javascript', src='/static/js/users.js')
+
+    body(ng-controller='ctrl')
+        include ./headers/nav
+        .container
+            h1 Input Username
+            br
+            input.form-control(type='text', ng-model='username', ng-enter='click.submit(username)')
+            br
+            button.btn.btn-primary(ng-click='click.submit(username)') Submit
+

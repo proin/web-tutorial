@@ -1,0 +1,17 @@
+html(ng-app='app')
+    head
+        title Middlewares:: Session
+        include ./headers/head
+        script(type='text/javascript', src='/static/js/middleware-mysql.js')
+
+    body(ng-controller='ctrl')
+        include ./headers/nav
+        .container(style='margin-top: 20px;')
+            .row
+                .col-md-4(style='padding: 10px', ng-repeat='item in list')
+                    .card
+                        .card-body
+                            h4.card-title {{item.affiliation}}
+                            h6.card-subtitle.mb-2.text-muted {{item.author}}
+                            p.card-text {{item.title}}
+

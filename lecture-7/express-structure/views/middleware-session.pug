@@ -1,0 +1,18 @@
+html(ng-app='app')
+    head
+        title Middlewares:: Session
+        include ./headers/head
+        script(type='text/javascript', src='/static/js/middleware-session.js')
+
+    body(ng-controller='ctrl')
+        include ./headers/nav
+        .container
+            if username
+                h2 Hello, #{username}
+                button.btn.btn-primary(ng-click='click.logout()') Logout
+
+            else
+                input.form-control(type='text', ng-model='username', ng-enter='click.submit(username)')
+                br
+                button.btn.btn-primary(ng-click='click.submit(username)') Submit
+               
