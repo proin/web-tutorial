@@ -21,10 +21,21 @@ router.get('/middleware/mysql', (req, res)=> {
     })
 })
 
+router.get('/test', (req, res)=> {
+    req.elastic.searchrr({
+        q: 'pants'
+    }).then(function (body) {
+        var hits = body.hits.hits;
+        console.log(hits)
+        res.send(hits)
+    }, function (error) {
+        console.trace(error.message);
+    });
+})
+
 // middleware:: elastic
 router.get('/middleware/elastic', (req, res)=> {
-    let client = req.elastic
-    client.search({
+    req.elastic.search({
         index: 'express',
         body: {
             size: 0,

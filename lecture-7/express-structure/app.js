@@ -25,8 +25,10 @@ app.set('view engine', 'pug')
 // define middleware
 app.use(bodyParser.urlencoded({extended: true}));
 
+const elasticURL = 'vinea.iptime.org:9200'
+
 app.use(logger({
-    host: 'localhost:9200'
+    host: elasticURL
 }))
 
 app.use(mysql({
@@ -37,7 +39,7 @@ app.use(mysql({
 }))
 
 app.use(elastic({
-    host: 'localhost:9200'
+    host: elasticURL  
 }))
 
 app.use(session({
