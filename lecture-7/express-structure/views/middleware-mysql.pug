@@ -8,7 +8,7 @@ html(ng-app='app')
         include ./headers/nav
         .container(style='margin-top: 20px;')
             .row
-                .col-md-4(style='padding: 10px', ng-repeat='item in list')
+                .col-md-4(style='padding: 10px', ng-repeat='item in list', ng-cloak)
                     .card
                         .card-body
                             h4.card-title {{item.affiliation}}

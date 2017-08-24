@@ -1,5 +1,7 @@
 'use strict'
 
+const TEST = 1
+
 // import npms
 const express = require('express')
 const session = require('express-session')
