@@ -1,0 +1,11 @@
+{
+  "name": "search-app",
+  "app_id": "",
+  "type": "ionic1",
+  "integrations": {
+    "gulp": {}
+  },
+  "watchPatterns": [
+    "scss/**/*"
+  ]
+}
