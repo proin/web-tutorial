@@ -9,6 +9,8 @@ router.post('/search', (req, res)=> {
 
     let result = mecab.parseSync(q);
 
+    console.log(result);
+
     // use bool
     let refine = [];
     for(let i = 0 ; i < result.length ; i++) {
@@ -27,7 +29,6 @@ router.post('/search', (req, res)=> {
 
     let should = [];
     for(let i = 0 ; i < refine.length ; i++) {
-        if(refine[i].type == 'must') continue;
         should.push({ term: { content: refine[i].val }});
         should.push({ term: { title: refine[i].val }});
     }

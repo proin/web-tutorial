@@ -13,7 +13,7 @@ html(ng-app='app')
                     i.icon-search
                 input#s(type='text', placeholder='search', ng-enter='search(query)', ng-model='query')
 
-        .container(ng-cloak)
+        .container(ng-if='result.length > 0', ng-cloak)
             .input-group
                 input.form-control(type='text', placeholder='Search for...', aria-label='Search for...', ng-model='query', ng-enter='search(query)')
                 span.input-group-btn
