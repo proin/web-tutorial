@@ -131,8 +131,8 @@ app.controller("ctrl", function ($scope, $timeout) {
             url: '/api/search',
             data: { q: query },
             success: function(data) {
-                console.log(data)
                 $scope.querystr = query;
+                $scope.query = query;
                 afterSearch(data);
             }
         })

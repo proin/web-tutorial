@@ -5,23 +5,86 @@ const router = express.Router()
 const mecab = require('mecab-ffi')
 
 router.post('/search', (req, res)=> {
-    let { q } = req.body;
+    let { q, multi_match } = req.body;
 
     let result = mecab.parseSync(q);
 
-    let should = [];
+    // use bool
+    let refine = [];
     for(let i = 0 ; i < result.length ; i++) {
-        should.push({ term: { context: result[i][0] }});
-        should.push({ term: { title: result[i][0] }});
+        if(result[i][1].indexOf('N') === -1)
+            continue;
+
+        if(result[i][result[i].length-1] !== '*') {
+            let d = result[i][result[i].length-1].split('+');
+            for(let j = 0 ; j < d.length ; j++) {
+                refine.push({ type: 'must', val: d[j].split('/')[0] });
+            }
+        } 
+        
+        refine.push({ type: 'should', val: result[i][0] })
     }
+
+    let should = [];
+    for(let i = 0 ; i < refine.length ; i++) {
+        if(refine[i].type == 'must') continue;
+        should.push({ term: { content: refine[i].val }});
+        should.push({ term: { title: refine[i].val }});
+    }
+
+    if(!multi_match) {
+        req.elastic.search({
+            index: 'dataset',
+            body: {
+                size: 15,
+                query: {
+                    bool: {
+                        should: should
+                    }
+                },
+                aggs: {
+                    byClass: {
+                        terms: {
+                            field: "class"
+                        }
+                    }, byDate: {
+                        date_histogram: {
+                            field: "date",
+                            interval: "month"
+                        }
+                    }
+                }
+            }
+        }, (err, resp)=> {
+            for(let i = 0 ; i < resp.aggregations.byClass.buckets.length ; i++) {
+                if(resp.aggregations.byClass.buckets[i].key == 'it') {  
+                    resp.aggregations.byClass.buckets.splice(i, 1);
+                    i--;
+                }
+            }
+            res.send(resp);
+        })
+        return;
+    }
+
+    // use multi match
+    refine = '';
+    for(let i = 0 ; i < result.length ; i++) {
+        if(result[i][1].indexOf('N') === -1)
+            continue;
+        refine = result[i][0] + ' ';
+    }
+
+    refine = refine.trim();
 
     req.elastic.search({
         index: 'dataset',
         body: {
             size: 15,
             query: {
-                bool: {
-                    should: should
+                multi_match: {
+                    query: refine,
+                    fields: [ 'title', 'content' ]
                 }
             },
             aggs: {
