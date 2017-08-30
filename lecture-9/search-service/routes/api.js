@@ -9,8 +9,6 @@ router.post('/search', (req, res)=> {
 
     let result = mecab.parseSync(q);
 
-    console.log(result);
-
     // use bool
     let refine = [];
     for(let i = 0 ; i < result.length ; i++) {
