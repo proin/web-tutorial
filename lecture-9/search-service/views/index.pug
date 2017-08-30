@@ -1,0 +1,42 @@
+html(ng-app='app')
+    head
+        title Index
+        include ./headers/head
+        script(type='text/javascript', src='/static/js/index.js')
+        link(rel='stylesheet', href='/static/css/index.css')
+    body(ng-controller='ctrl')
+        include ./headers/nav
+        
+        #container(ng-if='result.length == 0', ng-cloak)
+            #searchform
+                label(for='s')
+                    i.icon-search
+                input#s(type='text', placeholder='search', ng-enter='search(query)', ng-model='query')
+
+        .container(ng-cloak)
+            .input-group
+                input.form-control(type='text', placeholder='Search for...', aria-label='Search for...', ng-model='query', ng-enter='search(query)')
+                span.input-group-btn
+                    button.btn.btn-secondary(type='button', ng-click='search(query)') Go!
+            
+            hr
+
+            .alert.alert-info(role='alert')
+                | Search result for {{querystr}}, total {{data.hits.total}}
+
+            .row
+                .col-md-4.chart-1
+                    canvas#category-chart
+                .col-md-8.chart-2
+                    canvas#timeline
+
+            hr
+
+            .row
+                .col-md-4(ng-repeat='item in result')
+                    .card-body
+                        h4.card-title {{item._source.title}}
+                        h6.card-subtitle.mb-2.text-muted  {{item._source.date}}, {{item._source.class}}
+                        p.card-text {{item._source.content.substring(0, 100)}}...
+                        a.btn.btn-primary(href='{{item._source.url}}', target='_blank') Read More 
+
